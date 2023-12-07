@@ -30,18 +30,5 @@ substitutions:
     _ZONE: us-east1
     _GKE_CLUSTER: autopilot-cluster-1
 
-    #_DEPLOYMENTNAME: node
-    #_CONTAINERNAME: node
-    #_REPO_NAME: apigateway
-    #_VERSION: v4.0
-
-
-
-    # _CONTAINERNAME: pulsebackrepo
-
-
-
-    #_VERSION: v4.0
-
 options:
     substitution_option: 'ALLOW_LOOSE'

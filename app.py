@@ -32,7 +32,6 @@ def index():
     cursor = connection.cursor()
 
     try:
-        # Replace 'metrics' with the actual name of your table
         cursor.execute("SELECT * FROM metrics")
         data = cursor.fetchall()
         columns = [column[0] for column in cursor.description]
