@@ -1,0 +1,47 @@
+steps:
+  # Docker Build
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t',
+           'gcr.io/${_PROJECT_ID}/my-image:$SHORT_SHA',
+           '.']
+
+  # Docker Push
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push',
+           'gcr.io/${_PROJECT_ID}/my-image:$SHORT_SHA']
+
+
+
+  - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: /bin/sh
+    args:
+    - '-c'
+    - |
+      sed "s|VAR_IMAGE|gcr.io/${_PROJECT_ID}/my-image:$SHORT_SHA|g"  kubernetesprod.yaml > kubernetes.yaml
+  - name: 'gcr.io/cloud-builders/kubectl'
+    args: ['apply', '-f', 'kubernetes.yaml']
+    env:
+    - 'CLOUDSDK_COMPUTE_ZONE=${_ZONE}'
+    - 'CLOUDSDK_CONTAINER_CLUSTER=${_GKE_CLUSTER}'
+
+substitutions:
+
+    _PROJECT_ID: rich-crowbar-407313
+    _ZONE: us-east1
+    _GKE_CLUSTER: autopilot-cluster-1
+
+    #_DEPLOYMENTNAME: node
+    #_CONTAINERNAME: node
+    #_REPO_NAME: apigateway
+    #_VERSION: v4.0
+
+
+
+    # _CONTAINERNAME: pulsebackrepo
+
+
+
+    #_VERSION: v4.0
+
+options:
+    substitution_option: 'ALLOW_LOOSE'
