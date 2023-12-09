@@ -2,29 +2,55 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee Performance</title>
+    <title>Metrics</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
-    <h1>Employee Performance</h1>
-    <table border="1">
+    <h1>DeveloperIQ - Employee Performance</h1>
+    <table>
         <thead>
             <tr>
-                {% for column in columns %}
-                    <th>{{ column }}</th>
-                {% endfor %}
+                <th>ID</th>
+                <th>Username</th>
+                <th>Repository Owner</th>
+                <th>Repository Name</th>
+                <th>Commits</th>
+                <th>Open Issues</th>
+                <th>Pull Requests</th>
             </tr>
         </thead>
         <tbody>
             {% for row in data %}
                 <tr>
-                    {% for value in row %}
-                        <td>{{ value }}</td>
-                    {% endfor %}
+                    <td>{{ row.id }}</td>
+                    <td>{{ row.username }}</td>
+                    <td>{{ row.repo_owner }}</td>
+                    <td>{{ row.repo_name }}</td>
+                    <td>{{ row.commits }}</td>
+                    <td>{{ row.open_issues }}</td>
+                    <td>{{ row.pull_requests }}</td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
+<form action="{{ url_for('refresh_data') }}" method="get">
+    <input type="submit" value="Refresh Data">
+</form>
 </body>
 </html>
