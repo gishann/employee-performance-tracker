@@ -3,7 +3,7 @@ import requests
 
 # Replace these values with your GitHub username and access token
 github_username = "gishann"
-github_token = "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"
+github_token = "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"
 
 # Replace these values with your Amazon RDS SQL Server database credentials
 db_config = {
