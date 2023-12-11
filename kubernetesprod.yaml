@@ -1,25 +1,49 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deployment-emp-perf-prod
+  name: deployment-emp-perf-be-prod
   labels:
-    app: emp-perf
+    app: emp-perf-be
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: emp-perf
+      app: emp-perf-be
   template:
     metadata:
       labels:
-        app: emp-perf
+        app: emp-perf-be
         role: rolling-update
     spec:
       containers:
-      - name: emp-perf
-        image: gishann/emp-perf:1.0
+      - name: emp-perf-be
+        image: gishann/emp-perf-be:1.0
+
+---
+
+piVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-emp-perf-fe-prod
+  labels:
+    app: emp-perf-fe
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: emp-perf-fe
+  template:
+    metadata:
+      labels:
+        app: emp-perf-fe
+        role: rolling-update
+    spec:
+      containers:
+      - name: emp-perf-fe
+        image: gishann/emp-perf-fe:1.0
         ports:
         - containerPort: 5000
+
 ---
 apiVersion: v1
 kind: Service

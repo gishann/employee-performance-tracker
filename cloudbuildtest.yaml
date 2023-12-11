@@ -2,14 +2,24 @@ steps:
   # Docker Build
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t',
-           'gcr.io/${_PROJECT_ID}/my-image:$SHORT_SHA',
+           'gcr.io/${_PROJECT_ID}/emp-perf-be:$SHORT_SHA',
            '.']
 
   # Docker Push
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push',
-           'gcr.io/${_PROJECT_ID}/my-image:$SHORT_SHA']
+           'gcr.io/${_PROJECT_ID}/emp-perf-be:$SHORT_SHA']
 
+  # Docker Build
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t',
+           'gcr.io/${_PROJECT_ID}/emp-perf-fe:$SHORT_SHA',
+           '.']
+
+  # Docker Push
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push',
+           'gcr.io/${_PROJECT_ID}/emp-perf-fe:$SHORT_SHA']
 
 
   - name: 'gcr.io/cloud-builders/gcloud'
