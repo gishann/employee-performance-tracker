@@ -3,7 +3,7 @@ import requests
 
 # Replace these values with your GitHub username and access token
 github_username = "gishann"
-github_token = "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"
+github_token = "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"
 
 # Replace these values with your Amazon RDS SQL Server database credentials
 db_config = {
@@ -54,6 +54,8 @@ def insert_metrics(cursor, username, repo_owner, repo_name):
     try:
         cursor.execute(insert_query, insert_values)
         print(f"Metrics for {username} inserted successfully.")
+        # Commit the changes to the database
+        cursor.commit()
     except Exception as e:
         print(f"Error inserting metrics for {username}: {e}")
 
